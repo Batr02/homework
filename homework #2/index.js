@@ -68,7 +68,7 @@ function selectFromInterval(arr, firstNumber, secondNumber) {
     return result; 
 }; 
 //====================================
-console.log(selectFromInterval([1,2,3,5,6,8,10], "sd", 8))
+
 
 // #3
 //====================================
