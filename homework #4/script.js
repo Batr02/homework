@@ -11,7 +11,7 @@ function concatStrings(n1) {
   return next;
 }
 
-console.log(concatStrings("first")("second")('third')());
+console.log(concatStrings('first')('second')('third')());
 
 class Calculator {
 
