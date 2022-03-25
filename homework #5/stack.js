@@ -23,7 +23,7 @@ class Stack {
 
     isValidMaxAmount () {
         let isValidMaxAmountCondition = 
-        (this.maxAmount !== undefined) && (typeof(this.maxAmount) !== "number")
+        (this.maxAmount !== undefined) && (typeof(this.maxAmount) !== "number");
 
         if ( isValidMaxAmountCondition ) {
             throw new Error("Invalid input");
@@ -41,7 +41,7 @@ class Stack {
         this.storage[size] = data;
 
         if(this.size > this.maxAmount) {
-            return this.pop()
+            return this.pop();
         }
     }
     
@@ -49,7 +49,7 @@ class Stack {
        let size = this.size;
 
        if(size === 0) {
-           throw Error("Stack is Empty")
+           throw Error("Stack is Empty");
        }
     
        if (size) {
@@ -63,12 +63,12 @@ class Stack {
     }
 
     peek() {
-        const getElem = Object.keys(this.storage) [Object.keys(this.storage).length - 1]
-        return this.storage[getElem]    
+        let getElem = Object.keys(this.storage) [Object.keys(this.storage).length - 1];
+        return this.storage[getElem];    
     }
 
     isEmpty() {
-        if(this.size === 0){  
+        if (this.size === 0) {  
             return true;
         }
 
