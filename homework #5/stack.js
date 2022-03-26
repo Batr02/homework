@@ -1,88 +1,137 @@
-class Stack {    
-    constructor(maxAmount) {
-        this.maxAmount = maxAmount;
-        this.size = 0;
-        this.tail = 0;
-        this.head = 0;
-        this.storage = {};
-        this.isValidMaxAmount();
-        this.isUndefined();
+
+class LinkedListNode {
+    constructor(value, next = null) {
+      this.value = value;
+      this.next = next;
     }
+  }
 
-   static fromIterable(obj) {   
-        if (obj === undefined) {
-            throw Error ('not iterable!')
+
+class Stack {
+      constructor(maxAmount) {
+      this.head = null;
+      this.tail = null;
+      this.maxAmount = maxAmount;
+      this.isValidMaxAmount();
+      this.isUndefined();
+      }
+
+      isValidMaxAmount () {
+      let isValidMaxAmountCondition = 
+      (this.maxAmount !== undefined) && (typeof(this.maxAmount) !== "number")
+
+      if ( isValidMaxAmountCondition ) {
+          throw new Error("Invalid input");
         }
-
-        let iterableStack = new Stack()
-        iterableStack.maxAmount = obj.length;
-        iterableStack.storage = Object.assign({}, obj);
-
-        return iterableStack;
-   }
-
-    isValidMaxAmount () {
-        let isValidMaxAmountCondition = 
-        (this.maxAmount !== undefined) && (typeof(this.maxAmount) !== "number");
-
-        if ( isValidMaxAmountCondition ) {
-            throw new Error("Invalid input");
-        }
-    }
+      }
 
     isUndefined() {
-        if(this.maxAmount === undefined) {
-            this.maxAmount = 10;
+      if(this.maxAmount === undefined) {
+          this.maxAmount = 10;
         }
-    }
+      }
 
-    push (data) {
-        let size = ++this.size;
-        this.storage[size] = data;
+    push(value) {
+      const newNode = new LinkedListNode(value);
+      
+      if (!this.head || !this.tail) {
+          this.head = newNode;
+          this.tail = newNode;
+      
+          return this;
+      }
+      
+      this.tail.next = newNode;
+      
+      this.tail = newNode;
 
-        if(this.size > this.maxAmount) {
-            return this.pop();
-        }
-    }
+      if (this.toArray().length > this.maxAmount ) {
+        return this.pop();
+      }
     
-    pop () {
-       let size = this.size;
-
-       if(size === 0) {
-           throw Error("Stack is Empty");
-       }
-    
-       if (size) {
-        let deletedData = this.storage[size];
-        
-        delete this.storage[size];
-        this.size--;
-
-        return deletedData;
-        }
-    }
-
-    peek() {
-        let getElem = Object.keys(this.storage) [Object.keys(this.storage).length - 1];
-        return this.storage[getElem];    
-    }
-
-    isEmpty() {
-        if (this.size === 0) {  
-            return true;
-        }
-
-        return false;
+      return this;
     }
 
     toArray() {
-        let storageArray = Object.values(this.storage);
-        
-        return storageArray;
+      
+      const nodes = [];
+      
+      let currentNode = this.head;
+      
+      
+      while (currentNode) {
+        nodes.push(currentNode);
+        currentNode = currentNode.next;
+      }
+
+      return nodes;
     }
 
-}
+    pop() {
+      if (!this.tail) {
+        return null;
+      }
 
+      const deletedTail = this.tail;
+    
+      if (this.head === this.tail) {
+        this.head = null;
+        this.tail = null;
+    
+        return deletedTail;
+      }
+    
+      let currentNode = this.head;
+
+      while (currentNode.next) {
+        if (!currentNode.next.next) { 
+          currentNode.next = null;
+        } else {
+          currentNode = currentNode.next;
+        }
+      }
+
+      this.tail = currentNode;
+      
+      return deletedTail;
+    }
+
+    peek() {
+      return this.tail
+    }
+
+    isEmpty() {
+      if(this.toArray().length === 0) {
+        return true;
+      }
+
+      return false;
+    }
+
+    static fromIterable(obj) {
+      const fromIterableCondition = 
+      (typeof obj[Symbol.iterator] === 'function' || obj == null);
+
+      if(!fromIterableCondition) {
+        throw Error("not iterable!")
+      }
+
+      let fromIterableNew = new Stack();
+
+      for(let i = 0; i < obj.length; i++) {
+        fromIterableNew.push(obj[i])
+      }
+
+      return fromIterableNew;
+  }
+}
+    
 let stack = new Stack();
 console.log(stack);
+console.log(Stack.fromIterable([1, 2]));
+
+
+        
+     
+    
 // module.exports = { Stack };
