@@ -83,7 +83,7 @@ class Car {
         const brandCondition = 
         typeof(val) !== 'string' || val.length < 1 || val.length > 50;
         
-        if(brandCondition) {
+        if (brandCondition) {
             console.log('wrong brand input!');
         }
 
@@ -98,7 +98,7 @@ class Car {
         const modelCondition = 
         typeof(val) !== 'string' || val.length < 1 || val.length > 50;
         
-        if(modelCondition) {
+        if (modelCondition) {
             console.log('wrong model input!');
         }
 
@@ -114,7 +114,7 @@ class Car {
         const yearOfManufacturingCondition =
         typeof(val) !== 'number' || (val < 1900) || (val > currentYear);
 
-        if(yearOfManufacturingCondition) {
+        if (yearOfManufacturingCondition) {
             console.log('wrong yearOfManufacturing input!');
         }
 
@@ -144,7 +144,7 @@ class Car {
         const maxFuelVolumeCondition = 
         typeof(val) !== 'number' || (val < 5) || (val > 20);
         
-        if(maxFuelVolumeCondition) {
+        if (maxFuelVolumeCondition) {
             console.log('wrong maxFuelVolume input!');
         }
 
@@ -171,7 +171,7 @@ class Car {
     }
  
     get currentFuelVolume() {
-        if(this.#currentFuelVolume === undefined) {
+        if (this.#currentFuelVolume === undefined) {
             return  this.#currentFuelVolume = 0;
         }
 
@@ -185,7 +185,7 @@ class Car {
     }
 
     get mileage() {
-        if(this.#mileage === undefined) {
+        if (this.#mileage === undefined) {
             return  this.#mileage = 0;
         }
 
